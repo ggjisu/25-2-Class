@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NONFICTION</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: white;
+            padding: 20px;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 40px;
+        }
+
+        .logo-left {
+            font-size: 80px;
+            font-weight: bold;
+            letter-spacing: -2px;
+        }
+
+        .logo-right {
+            font-size: 80px;
+            font-weight: bold;
+            letter-spacing: -2px;
+        }
+
+        nav {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        nav button {
+            background: white;
+            border: 2px solid black;
+            padding: 5px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .top-right-nav {
+            display: flex;
+            gap: 10px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .card {
+            border: 1px solid black;
+            padding: 15px;
+            min-height: 200px;
+            position: relative;
+            cursor: pointer;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .card-header {
+            font-weight: bold;
+            margin-bottom: 10px;
+            font-size: 12px;
+            text-transform: uppercase;
+        }
+
+        .card-title {
+            font-weight: bold;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        .card-content {
+            font-size: 12px;
+            line-height: 1.4;
+            position: relative;
+            z-index: 1;
+        }
+
+        .card-hover-content {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .card:hover .card-hover-content {
+            opacity: 1;
+        }
+
+        .card:hover .card-content {
+            opacity: 0;
+        }
+
+        .hover-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .hover-black {
+            width: 100%;
+            height: 100%;
+            background: black;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .red-card {
+            background: red;
+            color: white;
+            grid-column: span 1;
+        }
+
+        .featured-card {
+            grid-column: span 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-size: 48px;
+            font-weight: bold;
+        }
+
+        .magazine-cover {
+            width: 80%;
+            margin-top: 20px;
+        }
+
+        .issue-number {
+            margin-top: 10px;
+            font-size: 12px;
+            font-weight: normal;
+        }
+
+        @media (max-width: 1200px) {
+            .grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .logo-left, .logo-right {
+                font-size: 40px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div>
+            <nav>
+                <button>Articles</button>
+                <button>Curation</button>
+                <button>Index</button>
+                <button>Bookshop</button>
+            </nav>
+            <div class="logo-left">NON</div>
+        </div>
+        <div style="text-align: right;">
+            <div class="top-right-nav">
+                <button>About</button>
+                <button>Cart (0)</button>
+            </div>
+            <div class="logo-right">FICTION</div>
+        </div>
+    </header>
+
+    <div class="grid">
+        <!-- Row 1 -->
+        <div class="card">
+            <div id="p5-canvas" style="width: 100%; height: 100%; position: absolute; top: 0; left: 0;"></div>
+            <div class="card-header" style="position: relative; z-index: 2;">INTERACTIVE ART</div>
+            <div class="card-title" style="position: relative; z-index: 2;">Mouse Particles</div>
+            <div class="card-content" style="position: relative; z-index: 2;">
+                Interactive particle system that follows your mouse movement. Move your cursor to create dynamic patterns.
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">UN·E ARTISTE</div>
+            <div class="card-title">ANASTASIA SIMONIN ET KAZUO MARSDEN</div>
+            <div class="card-content">
+                Anastasia Simonin et Kazuo Marsden est un duo d'artistes faussement lisse. Les œuvres à l'esthétique précise encapsulent les soubassements d'...
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">UN CONCEPT</div>
+            <div class="card-title">ÉCOTRANSFÉMINISMES</div>
+            <div class="card-content">
+                L'écotransféminisme est un concept formulé par Emma Bigé et Clovis Maillet dans leur essai paru en 2023 qui vise à formuler une pensé...
+            </div>
+        </div>
+
+        <div class="card red-card">
+            <div class="card-content">
+                <strong>NONFICTION lauched NON5UP2 a podcast (soon) and Telegram channel for critical readings. Join us</strong>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">UN·E ARTISTE</div>
+            <div class="card-title">BONY RAMIREZ</div>
+            <div class="card-content">
+                La peinture de Bony Ramirez soutient votre regard. Elle vous met au défi : "tu ne me connais pas, viens, je t'apprends"...
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">UN CONCEPT</div>
+            <div class="card-title">ÉCOFASCISME</div>
+            <div class="card-content">
+                L'écofascisme est un concept né de la contradiction du mot écologie et du mot fascisme. Le terme est pourtant tout à la...
+            </div>
+        </div>
+
+        <!-- Row 2 -->
+        <div class="card">
+            <div class="card-header">UN CONCEPT</div>
+            <div class="card-title">DÉMOCRATURE</div>
+            <div class="card-content">
+                La démocrature est un concept posé pour la première fois par le sociologue Gérard Mermet dans Démocrature. Comment les mé...
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">UN·E ARTISTE</div>
+            <div class="card-title">AURÉLIE FERRUEL & FLORENTINE GUÉDON</div>
+            <div class="card-content">
+                Aurélie Ferruel et Florentine Guédon est un duo d'artistes liées par la terre. Parce que toutes deux issues d'...
+            </div>
+        </div>
+
+        <div class="card featured-card">
+            <div>13</div>
+            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='280'%3E%3Crect fill='%23e0e0e0' width='200' height='280'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-size='20' fill='%23666'%3ENonFiction %2313%3C/text%3E%3C/svg%3E" alt="Magazine Cover" class="magazine-cover">
+            <div class="issue-number">01 NONFICTION #04</div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">UN·E ARTISTE</div>
+            <div class="card-title">MERCEDES DASSY</div>
+            <div class="card-content">
+                Mercedes Dassy est une artiste chorégraphe qui développe une esthétique du hacking et de l'affect. Simultanément. Ou comment ...
+            </div>
+            <div class="card-hover-content">
+                <div class="hover-black">CAPITALOCENE</div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">UN CONCEPT</div>
+            <div class="card-title">CAPITALOCÈNE</div>
+            <div class="card-content">
+                Le capitalocène est un concept d'Andrea Malm pour désigner la responsabilité du capitalisme dans les dérèglements ...
+            </div>
+        </div>
+
+        <!-- Row 3 -->
+        <div class="card">
+            <div class="card-header">OFF-SITE</div>
+            <div class="card-title">CALIBAN & THE WITCH(ES)</div>
+            <div class="card-content">
+                Écologique, car convaincue que le fond et la forme ne peuvent plus entrer en contradiction. L'exposition a débuté à Paris à notre de...
+            </div>
+        </div>
+
+        <div class="card red-card">
+            <div class="card-content">
+                <strong>NONEWS #042 will be OUT in November ! Subscribe now</strong>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">UN CONCEPT</div>
+            <div class="card-title">FÉMINISME DÉCOLONIAL</div>
+            <div class="card-content">
+                Le féminisme décolonial est une pensée féministe qui donne à voir les inégalités raciales entre les femmes dans ...
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">UN CONCEPT</div>
+            <div class="card-title">CONVIVIALITÉ</div>
+            <div class="card-content">
+                La convivialité est un concept d'Ivan Illich. Une société conviviale est une société sobre dans laquelle l'outil est au ...
+            </div>
+            <div class="card-hover-content">
+                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Crect fill='%23f0f0f0' width='300' height='300'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-size='24' fill='%23999'%3EConvivialité%3C/text%3E%3C/svg%3E" alt="Convivialité" class="hover-image">
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">UN·E ARTISTE</div>
+            <div class="card-title">GERTRUDA GILYTE</div>
+            <div class="card-content">
+                Gertruda Gilyte a de l'humour et un sens du cynisme empreint d'esthétique post internet. Explorant les ressorts ...
+            </div>
+        </div>
+    </div>
+
+    <div style="text-align: center; margin-top: 20px; font-size: 12px;">
+        02 NONFICTION #05
+    </div>
+
+    <script>
+        // Create a new p5 instance for the first card
+        new p5((p) => {
+            let strokeHue = 20;
+
+            p.setup = function() {
+                // Create canvas inside the p5-canvas div
+                let canvas = p.createCanvas(p.select('#p5-canvas').width, 200);
+                canvas.parent('p5-canvas');
+                
+                p.noFill();
+                p.strokeWeight(2);
+                p.colorMode(p.HSB);
+            };
+
+            p.draw = function() {
+                p.background(5, 0.1);
+
+                // Create bezier lines with anchor points moving with the cursor
+                for (let i = 0; i < 200; i += 20) {
+                    let strokeColor = i + 10;
+                    p.stroke(strokeColor, 50, 60);
+
+                    // Get mouse position relative to the canvas
+                    let relativeX = p.mouseX;
+                    let relativeY = p.mouseY;
+
+                    p.bezier(
+                        relativeX - i / 2, 0 + i,
+                        p.width/2, 20,
+                        p.width/2 + 30, p.height - 100,
+                        p.width/2 - i / 16, p.height - 100 + i / 8
+                    );
+                }
+            };
+
+            // Adjust canvas size when window is resized
+            p.windowResized = function() {
+                p.resizeCanvas(p.select('#p5-canvas').width, 200);
+            };
+        }, 'p5-canvas');
+    </script>
+</body>
+</html>
+
